@@ -82,7 +82,9 @@ class plgSystemJstats extends JPlugin
 		$data = array(
 			'php_version' => PHP_VERSION,
 			'db_type' => $this->db->name,
-			'db_version' => $this->db->getVersion()
+			'db_version' => $this->db->getVersion(),
+			'cms_version' => JVERSION,
+			'server_OS' => php_uname('s') . ' ' . php_uname('r')
 		);
 
 		$uri = new JUri('http://localhost/GIT/jstats-server/www/submit');
