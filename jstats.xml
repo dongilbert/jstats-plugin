@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.0" type="plugin" group="system">
+    <name>plg_system_jstats</name>
+    <author>Don Gilbert</author>
+    <creationDate>November 2013</creationDate>
+    <copyright>Copyright (C) 2013 Don Gilbert. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <authorEmail>don@dongilbert.net</authorEmail>
+    <authorUrl>dongilbert.net</authorUrl>
+    <version>1.0.0</version>
+    <description>PLG_JSTATS_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="jstats">jstats.php</filename>
+    </files>
+    <languages>
+        <language tag="en-GB">en-GB.plg_system_jstats.ini</language>
+        <language tag="en-GB">en-GB.plg_system_jstats.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field
+                    name="unique_id"
+                    type="text"
+                    description="PLG_JSTATS_UNIQUE_ID_DESC"
+                    label="PLG_JSTATS_UNIQUE_ID_LABEL"
+                    size="10" />
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>
