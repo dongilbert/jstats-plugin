@@ -84,13 +84,34 @@ class plgSystemJstats extends JPlugin
 			'db_type' => $this->db->name,
 			'db_version' => $this->db->getVersion(),
 			'cms_version' => JVERSION,
-			'server_OS' => php_uname('s') . ' ' . php_uname('r')
+			'server_os' => php_uname('s') . ' ' . php_uname('r')
 		);
 
 		$uri = new JUri('http://localhost/GIT/jstats-server/www/submit');
 
 		$status = $http->post($uri, $data);
 
-		var_dump($status);die;
+		if ($status->code === 200)
+		{
+			$this->writeCacheFile();
+		}
+	}
+
+	protected function writeCacheFile()
+	{
+		if (is_readable($this->cacheFile))
+		{
+			unlink($this->cacheFile);
+		}
+
+		$now = time();
+
+		$php = <<<PHP
+<?php defined('_JEXEC') or die;
+
+return $now;
+PHP;
+
+		file_put_contents($this->cacheFile, $php);
 	}
 }
