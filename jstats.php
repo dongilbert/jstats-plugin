@@ -77,6 +77,11 @@ class plgSystemJstats extends JPlugin
 
 	protected function sendStats()
 	{
+		if (! class_exists('JHttpFactory'))
+		{
+			JLoader::registerPrefix('J', dirname(__FILE__) . '/src/joomla');
+		}
+
 		$http = JHttpFactory::getHttp();
 
 		$data = array(
