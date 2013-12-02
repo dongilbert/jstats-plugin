@@ -79,7 +79,13 @@ class plgSystemJstats extends JPlugin
 	{
 		if (! class_exists('JHttpFactory'))
 		{
-			JLoader::registerPrefix('J', dirname(__FILE__) . '/src/joomla');
+			JLoader::register('JHttp', dirname(__FILE__) . '/src/joomla/http/http.php');
+			JLoader::register('JHttpFactory', dirname(__FILE__) . '/src/joomla/http/factory.php');
+			JLoader::register('JHttpResponse', dirname(__FILE__) . '/src/joomla/http/response.php');
+			JLoader::register('JHttpTransport', dirname(__FILE__) . '/src/joomla/http/transport.php');
+			JLoader::register('JHttpTransportCurl', dirname(__FILE__) . '/src/joomla/http/transport/curl.php');
+			JLoader::register('JHttpTransportSocket', dirname(__FILE__) . '/src/joomla/http/transport/socket.php');
+			JLoader::register('JHttpTransportStream', dirname(__FILE__) . '/src/joomla/http/transport/stream.php');
 		}
 
 		$http = JHttpFactory::getHttp();
