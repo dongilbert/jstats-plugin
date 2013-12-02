@@ -9,25 +9,34 @@
  */
 class plgSystemJstatsInstallerScript
 {
+	/**
+	 * Enable the plugin and set default params.
+	 *
+	 * @param $type
+	 * @param $parent
+	 */
 	public function postflight($type, $parent)
 	{
 		$this->removeCacheFile();
 
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
+		if ($type !== 'update')
+		{
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
 
-		$data = json_encode(array(
-			'unique_id' => $this->generateUniqueId()
-		));
+			$data = json_encode(array(
+				'unique_id' => $this->generateUniqueId()
+			));
 
-		// Enable and set a unique id
-		$query
-			->update('#__extensions')
-			->set('params = ' . $db->quote($data))
-			->set('enabled = 1')
-			->where('name = "plg_system_jstats"');
+			// Enable and set a unique id
+			$query
+				->update('#__extensions')
+				->set('params = ' . $db->quote($data))
+				->set('enabled = 1')
+				->where('name = "plg_system_jstats"');
 
-		$db->setQuery($query)->execute();
+			$db->setQuery($query)->execute();
+		}
 	}
 
 	public function uninstall($parent)
@@ -54,7 +63,7 @@ class plgSystemJstatsInstallerScript
 	 * Generates a unique key to reduce stats duplication.
 	 *
 	 * @return string
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	protected function generateUniqueId()
