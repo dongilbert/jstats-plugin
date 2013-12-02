@@ -11,6 +11,8 @@ class plgSystemJstatsInstallerScript
 {
 	public function postflight($type, $parent)
 	{
+		$this->removeCacheFile();
+
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
@@ -24,12 +26,36 @@ class plgSystemJstatsInstallerScript
 			->set('params = ' . $db->quote($data))
 			->set('enabled = 1')
 			->where('name = "plg_system_jstats"');
+
+		$db->setQuery($query)->execute();
+	}
+
+	public function uninstall($parent)
+	{
+		$this->removeCacheFile();
+	}
+
+	/**
+	 * Remove the cache file on uninstall and upgrade.
+	 *
+	 * @since 1.0
+	 */
+	protected function removeCacheFile()
+	{
+		$cacheFile = JPATH_ROOT . '/cache/jstats.php';
+
+		if (is_readable($cacheFile))
+		{
+			unlink($cacheFile);
+		}
 	}
 
 	/**
 	 * Generates a unique key to reduce stats duplication.
 	 *
 	 * @return string
+	 * 
+	 * @since 1.0
 	 */
 	protected function generateUniqueId()
 	{
