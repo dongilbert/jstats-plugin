@@ -85,6 +85,7 @@ class plgSystemJstats extends JPlugin
 		$http = JHttpFactory::getHttp();
 
 		$data = array(
+			'unique_id' => $this->params->get('unique_id'),
 			'php_version' => PHP_VERSION,
 			'db_type' => $this->db->name,
 			'db_version' => $this->db->getVersion(),
