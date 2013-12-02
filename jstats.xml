@@ -12,6 +12,7 @@
     <scriptfile>script.php</scriptfile>
     <files>
         <filename plugin="jstats">jstats.php</filename>
+        <folder>src</folder>
     </files>
     <languages folder="lang">
         <language tag="en-GB">en-GB/en-GB.plg_system_jstats.ini</language>
