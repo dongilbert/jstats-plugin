@@ -53,7 +53,7 @@ class plgSystemJstats extends JPlugin
 	{
 		$this->app = JFactory::getApplication();
 		$this->db = JFactory::getDbo();
-		$this->cacheFile = JPATH_CACHE . '/jstats.php';
+		$this->cacheFile = JPATH_ROOT . '/cache/jstats.php';
 
 		parent::__construct($subject, $config);
 	}
