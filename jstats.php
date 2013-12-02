@@ -93,7 +93,7 @@ class plgSystemJstats extends JPlugin
 			'server_os' => php_uname('s') . ' ' . php_uname('r')
 		);
 
-		$uri = new JUri('http://localhost/GIT/jstats-server/www/submit');
+		$uri = new JUri('http://jstats.dongilbert.net/submit');
 
 		$status = $http->post($uri, $data);
 
