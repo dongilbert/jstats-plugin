@@ -77,7 +77,7 @@ class plgSystemJstats extends JPlugin
 
 	protected function sendStats()
 	{
-		if (! class_exists('JHttpFactory'))
+		if (version_compare(JVERSION, '3.0', '<'))
 		{
 			JLoader::register('JHttp', dirname(__FILE__) . '/src/joomla/http/http.php');
 			JLoader::register('JHttpFactory', dirname(__FILE__) . '/src/joomla/http/factory.php');
@@ -101,11 +101,18 @@ class plgSystemJstats extends JPlugin
 
 		$uri = new JUri('http://jstats.dongilbert.net/submit');
 
-		$status = $http->post($uri, $data);
-
-		if ($status->code === 200)
+		try
 		{
-			$this->writeCacheFile();
+			$status = $http->post($uri, $data);
+
+			if ($status->code === 200)
+			{
+				$this->writeCacheFile();
+			}
+		}
+		catch (UnexpectedValueException $e)
+		{
+			// There was an error sending stats. Should we do anything?g
 		}
 	}
 
